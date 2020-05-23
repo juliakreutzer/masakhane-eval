@@ -3,10 +3,12 @@ import requests
 import os
 from joeynmt import helpers
 import yaml
+from time import sleep
+
 
 class MasakhaneModelLoader:
-
     """Load Masakhane models given a table with urls to their parts."""
+
     def __init__(self, model_parts_url, src_language='en', domain='JW300'):
         models_str = urllib.request.urlopen(model_parts_url).read().decode("utf-8")
         self._model_dir_prefix = 'joeynmt/models/'
@@ -166,6 +168,7 @@ class MasakhaneModelLoader:
 
     def _download_github_file(self, github_raw_path, destination):
         """Download a file from GitHub."""
+        sleep(1)
         try:
             urllib.request.urlretrieve(github_raw_path, destination)
         except:
@@ -176,6 +179,7 @@ class MasakhaneModelLoader:
     def _download(self, url, destination):
         """Download file from Github or Googledrive."""
         failed = 1
+        sleep(1)
         try:
             if 'drive.google.com' in url:
                 if url.startswith('https://drive.google.com/file'):
